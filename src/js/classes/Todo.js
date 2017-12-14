@@ -1,5 +1,6 @@
 class Todo {
     constructor(message) {
+        this.id = new Date().getTime();
         this.message = '';
         this.isCompleted = false;
 
