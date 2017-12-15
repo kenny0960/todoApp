@@ -18,7 +18,7 @@ class TodoStore extends BaseStore {
     }
 
     _appendTodo(todo) {
-        this._todos.push(todo)
+        this._todos.push(todo);
     }
 
     dispatchHandler(action) {
