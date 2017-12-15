@@ -1,12 +1,13 @@
 import React from "react";
 import ReactDOM from "react-dom";
+import CreateTodoInput from "./components/CreateTodoInput";
 
 ReactDOM.render(
     <section className="todoapp">
         <div>
             <header className="header">
                 <h1>todos</h1>
-                {/*TODO create todo input*/}
+                <CreateTodoInput />
             </header>
             <section className="main">
                 {/*TODO toggle all todos*/}
