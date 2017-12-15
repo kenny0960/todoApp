@@ -11,6 +11,13 @@ class TodoActions {
             todo: todo
         });
     }
+
+    updateCurrentTodoMessage(message) {
+        this._store.getDispatcher().dispatch({
+            actionType: this._store.DISPATCHER_UPDATE_CURRENT_TODO_MESSAGE,
+            message: message
+        });
+    }
 }
 
 export default new TodoActions();
