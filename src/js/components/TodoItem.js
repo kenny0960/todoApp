@@ -1,8 +1,19 @@
 import React from "react";
 import PropTypes from "prop-types";
 import Todo from "../classes/Todo";
+import TodoActions from "../actions/TodoActions";
 
 class TodoItem extends React.Component {
+    constructor() {
+        super();
+        this._actions = TodoActions;
+        this.toggleTodoCompleted = this.toggleTodoCompleted.bind(this);
+    }
+
+    toggleTodoCompleted() {
+        this._actions.toggleTodoCompleted(this.props.todo);
+    }
+
     render() {
         const todo = this.props.todo;
         return (
@@ -11,6 +22,7 @@ class TodoItem extends React.Component {
                     <input
                         className="toggle"
                         type="checkbox"
+                        onClick={this.toggleTodoCompleted}
                     />
                     <label>{todo.message}</label>
                     <button className="destroy" />
