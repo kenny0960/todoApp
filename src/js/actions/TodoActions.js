@@ -18,6 +18,12 @@ class TodoActions {
             message: message
         });
     }
+
+    resetCurrentTodo() {
+        this._store.getDispatcher().dispatch({
+            actionType: this._store.DISPATCHER_RESET_CURRENT_TODO
+        });
+    }
 }
 
 export default new TodoActions();

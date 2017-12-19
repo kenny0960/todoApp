@@ -6,6 +6,7 @@ class TodoStore extends BaseStore {
         super();
         this.DISPATCHER_CREATE_TODO = 'CREATE_TODO';
         this.DISPATCHER_UPDATE_CURRENT_TODO_MESSAGE = 'UPDATE_CURRENT_TODO_MESSAGE';
+        this.DISPATCHER_RESET_CURRENT_TODO = 'RESET_CURRENT_TODO';
         this._currentTodo = new Todo();
         this._todos = [];
     }
@@ -26,6 +27,10 @@ class TodoStore extends BaseStore {
         this._currentTodo.message = message;
     }
 
+    _resetCurrentTodo() {
+        this._currentTodo = new Todo();
+    }
+
     dispatchHandler(action) {
         switch (action.actionType) {
             case this.DISPATCHER_CREATE_TODO:
@@ -34,6 +39,10 @@ class TodoStore extends BaseStore {
 
             case this.DISPATCHER_UPDATE_CURRENT_TODO_MESSAGE:
                 this._updateCurrentTodoMessage(action.message);
+                break;
+
+            case this.DISPATCHER_RESET_CURRENT_TODO:
+                this._resetCurrentTodo();
                 break;
 
             //do nothing

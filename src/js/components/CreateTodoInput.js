@@ -55,6 +55,7 @@ class CreateTodoInput extends React.Component {
             return;
         }
         this._actions.createTodo(todo);
+        this._actions.resetCurrentTodo();
     }
 
     render() {
