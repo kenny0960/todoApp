@@ -8,6 +8,7 @@ class TodoItem extends React.Component {
         super();
         this._actions = TodoActions;
         this.toggleTodoCompleted = this.toggleTodoCompleted.bind(this);
+        this.destroyTodo = this.destroyTodo.bind(this);
     }
 
     getTodoClassName(isCompleted) {
@@ -22,6 +23,10 @@ class TodoItem extends React.Component {
         this._actions.toggleTodoCompleted(this.props.todo);
     }
 
+    destroyTodo() {
+        this._actions.destroyTodo(this.props.todo);
+    }
+
     render() {
         const todo = this.props.todo;
         return (
@@ -33,7 +38,10 @@ class TodoItem extends React.Component {
                         onClick={this.toggleTodoCompleted}
                     />
                     <label>{todo.message}</label>
-                    <button className="destroy" />
+                    <button
+                        className="destroy"
+                        onClick={this.destroyTodo}
+                    />
                 </div>
                 <input
                     className="edit"

@@ -19,6 +19,13 @@ class TodoActions {
         });
     }
 
+    destroyTodo(todo) {
+        this._store.getDispatcher().dispatch({
+            actionType: this._store.DISPATCHER_DESTROY_TODO,
+            todo: todo
+        });
+    }
+
     updateCurrentTodoMessage(message) {
         this._store.getDispatcher().dispatch({
             actionType: this._store.DISPATCHER_UPDATE_CURRENT_TODO_MESSAGE,

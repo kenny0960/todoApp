@@ -6,6 +6,7 @@ class TodoStore extends BaseStore {
         super();
         this.DISPATCHER_CREATE_TODO = 'CREATE_TODO';
         this.DISPATCHER_TOGGLE_TODO_COMPLETED = 'TOGGLE_TODO_COMPLETED';
+        this.DISPATCHER_DESTROY_TODO = 'DESTROY_TODO';
         this.DISPATCHER_UPDATE_CURRENT_TODO_MESSAGE = 'UPDATE_CURRENT_TODO_MESSAGE';
         this.DISPATCHER_RESET_CURRENT_TODO = 'RESET_CURRENT_TODO';
         this._currentTodo = new Todo();
@@ -33,6 +34,16 @@ class TodoStore extends BaseStore {
         }
     }
 
+    _destroyTodo(todo) {
+        for (const index in this._todos) {
+            const _todo = this._todos[index];
+            if (_todo.isEqual(todo)) {
+                this._todos.splice(index, 1);
+                return;
+            }
+        }
+    }
+
     _updateCurrentTodoMessage(message) {
         this._currentTodo.message = message;
     }
@@ -49,6 +60,10 @@ class TodoStore extends BaseStore {
 
             case this.DISPATCHER_TOGGLE_TODO_COMPLETED:
                 this._toggleTodoCompleted(action.todo);
+                break;
+
+            case this.DISPATCHER_DESTROY_TODO:
+                this._destroyTodo(action.todo);
                 break;
 
             case this.DISPATCHER_UPDATE_CURRENT_TODO_MESSAGE:
