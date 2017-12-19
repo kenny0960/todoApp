@@ -10,6 +10,14 @@ class TodoItem extends React.Component {
         this.toggleTodoCompleted = this.toggleTodoCompleted.bind(this);
     }
 
+    getTodoClassName(isCompleted) {
+        let className = '';
+        if (isCompleted) {
+            className += 'completed';
+        }
+        return className;
+    }
+
     toggleTodoCompleted() {
         this._actions.toggleTodoCompleted(this.props.todo);
     }
@@ -17,7 +25,7 @@ class TodoItem extends React.Component {
     render() {
         const todo = this.props.todo;
         return (
-            <li>
+            <li className={this.getTodoClassName(todo.isCompleted)}>
                 <div className="view">
                     <input
                         className="toggle"
