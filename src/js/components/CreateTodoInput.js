@@ -10,6 +10,7 @@ class CreateTodoInput extends React.Component {
         this.state = this.getStateFromStore();
         this.handleStoreChange = this.handleStoreChange.bind(this);
         this.handleInputChange = this.handleInputChange.bind(this);
+        this.handleInputKeyDown = this.handleInputKeyDown.bind(this);
     }
 
     getStateFromStore() {
@@ -37,6 +38,25 @@ class CreateTodoInput extends React.Component {
         this._actions.updateCurrentTodoMessage(message);
     }
 
+    handleInputKeyDown(event) {
+        switch (event.key) {
+            case 'Enter':
+                this.createTodo();
+                break;
+
+            default:
+                return;
+        }
+    }
+
+    createTodo() {
+        const todo = this.state.todo;
+        if (todo === '') {
+            return;
+        }
+        this._actions.createTodo(todo);
+    }
+
     render() {
         const todo = this.state.todo;
         return <input
@@ -44,6 +64,7 @@ class CreateTodoInput extends React.Component {
             placeholder="What needs to be done?"
             value={todo.message}
             onChange={this.handleInputChange}
+            onKeyDown={this.handleInputKeyDown}
         />;
     }
 }
