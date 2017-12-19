@@ -8,6 +8,13 @@ class Todo {
             this.message = message;
         }
     }
+
+    isEqual(todo) {
+        if (todo.id === this.id && todo.message === this.message) {
+            return true;
+        }
+        return false;
+    }
 }
 
 export default Todo;
