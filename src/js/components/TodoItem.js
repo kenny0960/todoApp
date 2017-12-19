@@ -7,14 +7,21 @@ class TodoItem extends React.Component {
     constructor() {
         super();
         this._actions = TodoActions;
+        this.state = {
+            isEditing: false
+        };
         this.toggleTodoCompleted = this.toggleTodoCompleted.bind(this);
         this.destroyTodo = this.destroyTodo.bind(this);
+        this.handleMessageDoubleClick = this.handleMessageDoubleClick.bind(this);
     }
 
     getTodoClassName(isCompleted) {
         let className = '';
         if (isCompleted) {
             className += 'completed';
+        }
+        if (this.state.isEditing) {
+            className += ' editing';
         }
         return className;
     }
@@ -27,6 +34,16 @@ class TodoItem extends React.Component {
         this._actions.destroyTodo(this.props.todo);
     }
 
+    handleMessageDoubleClick() {
+        this.setEditing(true);
+    }
+
+    setEditing(isEditing) {
+        this.setState({
+            isEditing: isEditing
+        });
+    }
+
     render() {
         const todo = this.props.todo;
         return (
@@ -37,7 +54,9 @@ class TodoItem extends React.Component {
                         type="checkbox"
                         onClick={this.toggleTodoCompleted}
                     />
-                    <label>{todo.message}</label>
+                    <label onDoubleClick={this.handleMessageDoubleClick}>
+                        {todo.message}
+                    </label>
                     <button
                         className="destroy"
                         onClick={this.destroyTodo}
