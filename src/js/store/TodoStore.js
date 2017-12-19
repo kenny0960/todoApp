@@ -21,27 +21,27 @@ class TodoStore extends BaseStore {
         return this._todos;
     }
 
+    getTodoIndex(todo) {
+        for (const index in this._todos) {
+            const _todo = this._todos[index];
+            if (_todo.isEqual(todo)) {
+                return index;
+            }
+        }
+    }
+
     _appendTodo(todo) {
         this._todos.push(todo);
     }
 
     _toggleTodoCompleted(todo) {
-        for (const _todo of this._todos) {
-            if (_todo.isEqual(todo)) {
-                _todo.isCompleted = ! todo.isCompleted;
-                return;
-            }
-        }
+        const index = this.getTodoIndex(todo);
+        this._todos[index].isCompleted = ! todo.isCompleted;
     }
 
     _destroyTodo(todo) {
-        for (const index in this._todos) {
-            const _todo = this._todos[index];
-            if (_todo.isEqual(todo)) {
-                this._todos.splice(index, 1);
-                return;
-            }
-        }
+        const index = this.getTodoIndex(todo);
+        this._todos.splice(index, 1);
     }
 
     _updateCurrentTodoMessage(message) {
