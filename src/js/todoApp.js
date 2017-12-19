@@ -1,6 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import CreateTodoInput from "./components/CreateTodoInput";
+import TodoList from "./components/TodoList";
 
 ReactDOM.render(
     <section className="todoapp">
@@ -11,7 +12,7 @@ ReactDOM.render(
             </header>
             <section className="main">
                 {/*TODO toggle all todos*/}
-                {/*TODO todo list*/}
+                <TodoList />
             </section>
             <footer className="footer">
                 {/*TODO todo count*/}
