@@ -82,6 +82,20 @@ class TodoItem extends React.Component {
         });
     }
 
+    getEditInput() {
+        if (this.state.isEditing) {
+            return <input
+                ref="editInput"
+                className="edit"
+                value={this.state.editMessage}
+                onChange={this.handleEditInputChange}
+                onKeyDown={this.handleEditInputKeyDown}
+                autoFocus
+            />;
+        }
+        return null;
+    }
+
     render() {
         const todo = this.props.todo;
         return (
@@ -100,12 +114,7 @@ class TodoItem extends React.Component {
                         onClick={this.destroyTodo}
                     />
                 </div>
-                <input
-                    className="edit"
-                    value={this.state.editMessage}
-                    onChange={this.handleEditInputChange}
-                    onKeyDown={this.handleEditInputKeyDown}
-                />
+                {this.getEditInput()}
             </li>
         );
     }
