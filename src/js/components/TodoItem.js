@@ -4,15 +4,17 @@ import Todo from "../classes/Todo";
 import TodoActions from "../actions/TodoActions";
 
 class TodoItem extends React.Component {
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
         this._actions = TodoActions;
         this.state = {
+            editMessage: props.todo.message,
             isEditing: false
         };
         this.toggleTodoCompleted = this.toggleTodoCompleted.bind(this);
         this.destroyTodo = this.destroyTodo.bind(this);
         this.handleMessageDoubleClick = this.handleMessageDoubleClick.bind(this);
+        this.handleEditInputChange = this.handleEditInputChange.bind(this);
     }
 
     getTodoClassName(isCompleted) {
@@ -38,9 +40,20 @@ class TodoItem extends React.Component {
         this.setEditing(true);
     }
 
+    handleEditInputChange(event) {
+        const message = event.target.value;
+        this.setEditMessage(message);
+    }
+
     setEditing(isEditing) {
         this.setState({
             isEditing: isEditing
+        });
+    }
+
+    setEditMessage(message) {
+        this.setState({
+            editMessage: message
         });
     }
 
@@ -64,7 +77,8 @@ class TodoItem extends React.Component {
                 </div>
                 <input
                     className="edit"
-                    value={todo.message}
+                    value={this.state.editMessage}
+                    onChange={this.handleEditInputChange}
                 />
             </li>
         );
