@@ -15,6 +15,7 @@ class TodoItem extends React.Component {
         this.destroyTodo = this.destroyTodo.bind(this);
         this.handleMessageDoubleClick = this.handleMessageDoubleClick.bind(this);
         this.handleEditInputChange = this.handleEditInputChange.bind(this);
+        this.handleEditInputKeyDown = this.handleEditInputKeyDown.bind(this);
     }
 
     getTodoClassName(isCompleted) {
@@ -43,6 +44,18 @@ class TodoItem extends React.Component {
     handleEditInputChange(event) {
         const message = event.target.value;
         this.setEditMessage(message);
+    }
+
+    handleEditInputKeyDown(event) {
+        switch (event.key) {
+            case 'Escape':
+                this.setEditMessage(this.props.todo.message);
+                this.setEditing(false);
+                break;
+
+            default:
+                return;
+        }
     }
 
     setEditing(isEditing) {
@@ -79,6 +92,7 @@ class TodoItem extends React.Component {
                     className="edit"
                     value={this.state.editMessage}
                     onChange={this.handleEditInputChange}
+                    onKeyDown={this.handleEditInputKeyDown}
                 />
             </li>
         );
