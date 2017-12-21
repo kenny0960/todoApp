@@ -48,6 +48,18 @@ class TodoItem extends React.Component {
 
     handleEditInputKeyDown(event) {
         switch (event.key) {
+            case 'Enter':
+                const message = this.state.editMessage;
+                const todo = this.props.todo;
+                todo.message = message;
+                if (message === '') {
+                    this._actions.destroyTodo(todo);
+                    return;
+                }
+                this._actions.updateTodo(todo);
+                this.setEditing(false);
+                break;
+
             case 'Escape':
                 this.setEditMessage(this.props.todo.message);
                 this.setEditing(false);
