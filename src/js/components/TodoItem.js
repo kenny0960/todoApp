@@ -113,6 +113,7 @@ class TodoItem extends React.Component {
                         className="toggle"
                         type="checkbox"
                         onClick={this.toggleTodoCompleted}
+                        checked={this.props.todo.isCompleted}
                     />
                     <label onDoubleClick={this.handleMessageDoubleClick}>
                         {todo.message}
