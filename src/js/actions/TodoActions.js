@@ -19,6 +19,13 @@ class TodoActions {
         });
     }
 
+    toggleAllTodoCompleted(isCompleted) {
+        this._store.getDispatcher().dispatch({
+            actionType: this._store.DISPATCHER_TOGGLE_ALL_TODO_COMPLETED,
+            isCompleted: isCompleted
+        });
+    }
+
     updateTodo(todo) {
         this._store.getDispatcher().dispatch({
             actionType: this._store.DISPATCHER_UPDATE_TODO,
