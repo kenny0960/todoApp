@@ -32,6 +32,18 @@ class TodoStore extends BaseStore {
         }
     }
 
+    isAllTodoCompleted() {
+        if (this._todos.length === 0) {
+            return false;
+        }
+        for (const _todo of this._todos) {
+            if ( ! _todo.isCompleted){
+                return false;
+            }
+        }
+        return true;
+    }
+
     _appendTodo(todo) {
         this._todos.push(todo);
     }
