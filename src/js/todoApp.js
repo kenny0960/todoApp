@@ -1,6 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import CreateTodoInput from "./components/CreateTodoInput";
+import ToggleAllTodoCompletedCheckbox from "./components/ToggleAllTodoCompletedCheckbox";
 import TodoList from "./components/TodoList";
 
 ReactDOM.render(
@@ -11,7 +12,7 @@ ReactDOM.render(
                 <CreateTodoInput />
             </header>
             <section className="main">
-                {/*TODO toggle all todos*/}
+                <ToggleAllTodoCompletedCheckbox />
                 <TodoList />
             </section>
             <footer className="footer">
