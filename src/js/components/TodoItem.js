@@ -16,6 +16,7 @@ class TodoItem extends React.Component {
         this.handleMessageDoubleClick = this.handleMessageDoubleClick.bind(this);
         this.handleEditInputChange = this.handleEditInputChange.bind(this);
         this.handleEditInputKeyDown = this.handleEditInputKeyDown.bind(this);
+        this.handleEditInputFocus = this.handleEditInputFocus.bind(this);
     }
 
     getTodoClassName(isCompleted) {
@@ -70,6 +71,12 @@ class TodoItem extends React.Component {
         }
     }
 
+    handleEditInputFocus(event) {
+        const message = event.target.value;
+        event.target.value = '';
+        event.target.value = message;
+    }
+
     setEditing(isEditing) {
         this.setState({
             isEditing: isEditing
@@ -90,6 +97,7 @@ class TodoItem extends React.Component {
                 value={this.state.editMessage}
                 onChange={this.handleEditInputChange}
                 onKeyDown={this.handleEditInputKeyDown}
+                onFocus={this.handleEditInputFocus}
                 autoFocus
             />;
         }
