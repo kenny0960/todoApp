@@ -14,7 +14,7 @@ class TodoList extends React.Component {
 
     getStateFromStore() {
         return {
-            todos: this._store.getList()
+            todos: this._store.getAllTodos()
         };
     }
 

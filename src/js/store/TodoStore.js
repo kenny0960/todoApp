@@ -19,7 +19,7 @@ class TodoStore extends BaseStore {
         return this._currentTodo;
     }
 
-    getList() {
+    getAllTodos() {
         return this._todos;
     }
 
