@@ -23,6 +23,26 @@ class TodoStore extends BaseStore {
         return this._todos;
     }
 
+    getActiveTodos() {
+        let activeTodos = [];
+        for (const _todo of this._todos) {
+            if ( ! _todo.isCompleted){
+                activeTodos.push(_todo);
+            }
+        }
+        return activeTodos;
+    }
+
+    getCompletedTodos() {
+        let activeTodos = [];
+        for (const _todo of this._todos) {
+            if (_todo.isCompleted){
+                activeTodos.push(_todo);
+            }
+        }
+        return activeTodos;
+    }
+
     getTodoIndex(todo) {
         for (const index in this._todos) {
             const _todo = this._todos[index];
