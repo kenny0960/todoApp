@@ -2,6 +2,7 @@ import React from "react";
 import TodoFilter from "./TodoFilter";
 import TodoActions from "../actions/TodoActions";
 import TodoStore from "../store/TodoStore";
+import { TodoFilterLabels } from "../constants/TodoFilterConstants";
 
 class TodoFilters extends React.Component {
     constructor() {
@@ -41,20 +42,20 @@ class TodoFilters extends React.Component {
         return (
             <ul className="filters">
                 <TodoFilter
-                    label='All'
-                    isSelected={this.state.selectedLabel === 'All'}
+                    label={TodoFilterLabels.ALL}
+                    isSelected={this.state.selectedLabel === TodoFilterLabels.ALL}
                     onClick={this.setFilterSelected}
                 />
                 <span> </span>
                 <TodoFilter
-                    label='Active'
-                    isSelected={this.state.selectedLabel === 'Active'}
+                    label={TodoFilterLabels.ACTIVE}
+                    isSelected={this.state.selectedLabel === TodoFilterLabels.ACTIVE}
                     onClick={this.setFilterSelected}
                 />
                 <span> </span>
                 <TodoFilter
-                    label='Completed'
-                    isSelected={this.state.selectedLabel === 'Completed'}
+                    label={TodoFilterLabels.COMPLETED}
+                    isSelected={this.state.selectedLabel === TodoFilterLabels.COMPLETED}
                     onClick={this.setFilterSelected}
                 />
             </ul>

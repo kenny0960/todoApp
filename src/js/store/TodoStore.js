@@ -1,5 +1,6 @@
 import BaseStore from "../classes/BaseStore";
 import Todo from "../classes/Todo";
+import { TodoFilterLabels } from "../constants/TodoFilterConstants";
 
 class TodoStore extends BaseStore {
     constructor() {
@@ -14,7 +15,7 @@ class TodoStore extends BaseStore {
         this.DISPATCHER_RESET_CURRENT_TODO = 'RESET_CURRENT_TODO';
         this._currentTodo = new Todo();
         this._todos = [];
-        this._selectedFilterLabel = 'All';
+        this._selectedFilterLabel = TodoFilterLabels.ALL;
     }
 
     getCurrentTodo() {
@@ -24,15 +25,15 @@ class TodoStore extends BaseStore {
     getFilteredList() {
         let filter = [];
         switch (this._selectedFilterLabel) {
-            case 'All':
+            case TodoFilterLabels.ALL:
                 filter = this.getAllTodos();
                 break;
 
-            case 'Active':
+            case TodoFilterLabels.ACTIVE:
                 filter = this.getActiveTodos();
                 break;
 
-            case 'Completed':
+            case TodoFilterLabels.COMPLETED:
                 filter = this.getCompletedTodos();
                 break;
         }
