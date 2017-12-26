@@ -45,5 +45,4 @@ TodoFilter.defaultProps = {
     onClick: null
 };
 
-
 export default TodoFilter;
