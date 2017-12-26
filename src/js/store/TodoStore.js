@@ -8,6 +8,7 @@ class TodoStore extends BaseStore {
         this.DISPATCHER_CREATE_TODO = 'CREATE_TODO';
         this.DISPATCHER_TOGGLE_TODO_COMPLETED = 'TOGGLE_TODO_COMPLETED';
         this.DISPATCHER_TOGGLE_ALL_TODO_COMPLETED = 'TOGGLE_ALL_TODO_COMPLETED';
+        this.DISPATCHER_CLEAR_ALL_COMPLETED_TODO = 'CLEAR_ALL_COMPLETED_TODO';
         this.DISPATCHER_UPDATE_TODO = 'UPDATE_TODO';
         this.DISPATCHER_DESTROY_TODO = 'DESTROY_TODO';
         this.DISPATCHER_UPDATE_CURRENT_TODO_MESSAGE = 'UPDATE_CURRENT_TODO_MESSAGE';
@@ -113,6 +114,13 @@ class TodoStore extends BaseStore {
         }
     }
 
+    _clearAllCompletedTodo() {
+        let todos = this.getCompletedTodos();
+        for (const todo of todos) {
+            this._destroyTodo(todo);
+        }
+    }
+
     _updateTodo(todo) {
         const index = this.getTodoIndex(todo);
         this._todos[index] = todo;
@@ -147,6 +155,10 @@ class TodoStore extends BaseStore {
 
             case this.DISPATCHER_TOGGLE_ALL_TODO_COMPLETED:
                 this._toggleAllTodoCompleted(action.isCompleted);
+                break;
+
+            case this.DISPATCHER_CLEAR_ALL_COMPLETED_TODO:
+                this._clearAllCompletedTodo();
                 break;
 
             case this.DISPATCHER_UPDATE_TODO:
