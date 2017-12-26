@@ -4,6 +4,7 @@ import CreateTodoInput from "./components/CreateTodoInput";
 import ToggleAllTodoCompletedCheckbox from "./components/ToggleAllTodoCompletedCheckbox";
 import TodoList from "./components/TodoList";
 import TodoCountSpan from "./components/TodoCountSpan";
+import TodoFilters from "./components/TodoFilters";
 
 ReactDOM.render(
     <section className="todoapp">
@@ -18,7 +19,7 @@ ReactDOM.render(
             </section>
             <footer className="footer">
                 <TodoCountSpan />
-                {/*TODO todo filters*/}
+                <TodoFilters />
                 {/*TODO clear complete todos*/}
             </footer>
         </div>
