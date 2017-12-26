@@ -1,19 +1,40 @@
 import React from "react";
 import TodoFilter from "./TodoFilter";
+import TodoActions from "../actions/TodoActions";
+import TodoStore from "../store/TodoStore";
 
 class TodoFilters extends React.Component {
     constructor() {
         super();
-        this.state = {
-            selectedLabel: 'All'
-        };
+        this._store = TodoStore;
+        this._actions = TodoActions;
+        this.state = this.getStateFromStore();
+        this.handleStoreChange = this.handleStoreChange.bind(this);
         this.setFilterSelected = this.setFilterSelected.bind(this);
     }
 
+    getStateFromStore() {
+        return {
+            selectedLabel: this._store.getSelectedFilterLabel()
+        };
+    }
+
+    componentDidMount() {
+        this._store.addChangeListener(this.handleStoreChange);
+    }
+
+    componentWillUnmount() {
+        this._store.removeChangeListener(this.handleStoreChange);
+    }
+
+    handleStoreChange() {
+        this.setState(
+            this.getStateFromStore()
+        );
+    }
+
     setFilterSelected(label) {
-        this.setState({
-            selectedLabel: label
-        });
+        this._actions.setSelectedFilterLabel(label);
     }
 
     render() {
