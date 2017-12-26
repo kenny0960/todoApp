@@ -21,6 +21,24 @@ class TodoStore extends BaseStore {
         return this._currentTodo;
     }
 
+    getFilteredList() {
+        let filter = [];
+        switch (this._selectedFilterLabel) {
+            case 'All':
+                filter = this.getAllTodos();
+                break;
+
+            case 'Active':
+                filter = this.getActiveTodos();
+                break;
+
+            case 'Completed':
+                filter = this.getCompletedTodos();
+                break;
+        }
+        return filter;
+    }
+
     getAllTodos() {
         return this._todos;
     }
