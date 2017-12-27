@@ -1,4 +1,5 @@
 import TodoStore from "../store/TodoStore";
+import { TodoActionTypes } from "../constants/ActionTypes";
 
 class TodoActions {
     constructor() {
@@ -7,48 +8,48 @@ class TodoActions {
 
     createTodo(todo) {
         this._store.getDispatcher().dispatch({
-            actionType: this._store.DISPATCHER_CREATE_TODO,
+            actionType: TodoActionTypes.CREATE_TODO,
             todo: todo
         });
     }
 
     updateTodo(todo) {
         this._store.getDispatcher().dispatch({
-            actionType: this._store.DISPATCHER_UPDATE_TODO,
+            actionType: TodoActionTypes.UPDATE_TODO,
             todo: todo
         });
     }
 
     destroyTodo(todo) {
         this._store.getDispatcher().dispatch({
-            actionType: this._store.DISPATCHER_DESTROY_TODO,
+            actionType: TodoActionTypes.DESTROY_TODO,
             todo: todo
         });
     }
 
     toggleTodoCompleted(todo) {
         this._store.getDispatcher().dispatch({
-            actionType: this._store.DISPATCHER_TOGGLE_TODO_COMPLETED,
+            actionType: TodoActionTypes.TOGGLE_TODO_COMPLETED,
             todo: todo
         });
     }
 
     toggleAllTodoCompleted(isCompleted) {
         this._store.getDispatcher().dispatch({
-            actionType: this._store.DISPATCHER_TOGGLE_ALL_TODO_COMPLETED,
+            actionType: TodoActionTypes.TOGGLE_ALL_TODO_COMPLETED,
             isCompleted: isCompleted
         });
     }
 
     clearAllCompletedTodo() {
         this._store.getDispatcher().dispatch({
-            actionType: this._store.DISPATCHER_CLEAR_ALL_COMPLETED_TODO
+            actionType: TodoActionTypes.CLEAR_ALL_COMPLETED_TODO
         });
     }
 
     setSelectedFilterLabel(label) {
         this._store.getDispatcher().dispatch({
-            actionType: this._store.DISPATCHER_SET_SELECTED_FILTER_LABEL,
+            actionType: TodoActionTypes.SET_SELECTED_FILTER_LABEL,
             label: label
         });
     }

@@ -1,16 +1,10 @@
 import BaseStore from "../classes/BaseStore";
+import { TodoActionTypes } from "../constants/ActionTypes";
 import { TodoFilterLabels } from "../constants/TodoFilterConstants";
 
 class TodoStore extends BaseStore {
     constructor() {
         super();
-        this.DISPATCHER_CREATE_TODO = 'CREATE_TODO';
-        this.DISPATCHER_UPDATE_TODO = 'UPDATE_TODO';
-        this.DISPATCHER_DESTROY_TODO = 'DESTROY_TODO';
-        this.DISPATCHER_TOGGLE_TODO_COMPLETED = 'TOGGLE_TODO_COMPLETED';
-        this.DISPATCHER_TOGGLE_ALL_TODO_COMPLETED = 'TOGGLE_ALL_TODO_COMPLETED';
-        this.DISPATCHER_CLEAR_ALL_COMPLETED_TODO = 'CLEAR_ALL_COMPLETED_TODO';
-        this.DISPATCHER_SET_SELECTED_FILTER_LABEL = 'SET_SELECTED_FILTER_LABEL';
         this._todos = [];
         this._selectedFilterLabel = TodoFilterLabels.ALL;
     }
@@ -129,31 +123,31 @@ class TodoStore extends BaseStore {
 
     dispatchHandler(action) {
         switch (action.actionType) {
-            case this.DISPATCHER_CREATE_TODO:
+            case TodoActionTypes.CREATE_TODO:
                 this._appendTodo(action.todo);
                 break;
 
-            case this.DISPATCHER_UPDATE_TODO:
+            case TodoActionTypes.UPDATE_TODO:
                 this._updateTodo(action.todo);
                 break;
 
-            case this.DISPATCHER_DESTROY_TODO:
+            case TodoActionTypes.DESTROY_TODO:
                 this._destroyTodo(action.todo);
                 break;
 
-            case this.DISPATCHER_TOGGLE_TODO_COMPLETED:
+            case TodoActionTypes.TOGGLE_TODO_COMPLETED:
                 this._toggleTodoCompleted(action.todo);
                 break;
 
-            case this.DISPATCHER_TOGGLE_ALL_TODO_COMPLETED:
+            case TodoActionTypes.TOGGLE_ALL_TODO_COMPLETED:
                 this._toggleAllTodoCompleted(action.isCompleted);
                 break;
 
-            case this.DISPATCHER_CLEAR_ALL_COMPLETED_TODO:
+            case TodoActionTypes.CLEAR_ALL_COMPLETED_TODO:
                 this._clearAllCompletedTodo();
                 break;
 
-            case this.DISPATCHER_SET_SELECTED_FILTER_LABEL:
+            case TodoActionTypes.SET_SELECTED_FILTER_LABEL:
                 this._setSelectedFilterLabel(action.label);
                 break;
 
