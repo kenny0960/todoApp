@@ -1,41 +1,21 @@
 import React from "react";
-import TodoStore from "../store/TodoStore";
 import TodoActions from "../actions/TodoActions";
+import Todo from "../classes/Todo";
 
 class CreateTodoInput extends React.Component {
     constructor() {
         super();
-        this._store = TodoStore;
         this._actions = TodoActions;
-        this.state = this.getStateFromStore();
-        this.handleStoreChange = this.handleStoreChange.bind(this);
+        this.state = {
+            message: ''
+        };
         this.handleInputChange = this.handleInputChange.bind(this);
         this.handleInputKeyDown = this.handleInputKeyDown.bind(this);
     }
 
-    getStateFromStore() {
-        return {
-            todo: this._store.getCurrentTodo()
-        };
-    }
-
-    componentDidMount() {
-        this._store.addChangeListener(this.handleStoreChange);
-    }
-
-    componentWillUnmount() {
-        this._store.removeChangeListener(this.handleStoreChange);
-    }
-
-    handleStoreChange() {
-        this.setState(
-            this.getStateFromStore()
-        );
-    }
-
     handleInputChange(event) {
         const message = event.target.value;
-        this._actions.updateCurrentTodoMessage(message);
+        this.updateMessage(message);
     }
 
     handleInputKeyDown(event) {
@@ -49,21 +29,30 @@ class CreateTodoInput extends React.Component {
         }
     }
 
+    updateMessage(message) {
+        this.setState({
+            message: message
+        });
+    }
+
+    resetMessage() {
+        this.updateMessage('');
+    }
+
     createTodo() {
-        const todo = this.state.todo;
-        if (todo === '') {
+        const message = this.state.message;
+        if (message === '') {
             return;
         }
-        this._actions.createTodo(todo);
-        this._actions.resetCurrentTodo();
+        this._actions.createTodo(new Todo(message));
+        this.resetMessage();
     }
 
     render() {
-        const todo = this.state.todo;
         return <input
             className="new-todo"
             placeholder="What needs to be done?"
-            value={todo.message}
+            value={this.state.message}
             onChange={this.handleInputChange}
             onKeyDown={this.handleInputKeyDown}
         />;

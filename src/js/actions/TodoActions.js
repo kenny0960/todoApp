@@ -46,23 +46,10 @@ class TodoActions {
         });
     }
 
-    updateCurrentTodoMessage(message) {
-        this._store.getDispatcher().dispatch({
-            actionType: this._store.DISPATCHER_UPDATE_CURRENT_TODO_MESSAGE,
-            message: message
-        });
-    }
-
     setSelectedFilterLabel(label) {
         this._store.getDispatcher().dispatch({
             actionType: this._store.DISPATCHER_SET_SELECTED_FILTER_LABEL,
             label: label
-        });
-    }
-
-    resetCurrentTodo() {
-        this._store.getDispatcher().dispatch({
-            actionType: this._store.DISPATCHER_RESET_CURRENT_TODO
         });
     }
 }

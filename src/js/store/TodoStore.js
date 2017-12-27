@@ -1,5 +1,4 @@
 import BaseStore from "../classes/BaseStore";
-import Todo from "../classes/Todo";
 import { TodoFilterLabels } from "../constants/TodoFilterConstants";
 
 class TodoStore extends BaseStore {
@@ -11,16 +10,9 @@ class TodoStore extends BaseStore {
         this.DISPATCHER_CLEAR_ALL_COMPLETED_TODO = 'CLEAR_ALL_COMPLETED_TODO';
         this.DISPATCHER_UPDATE_TODO = 'UPDATE_TODO';
         this.DISPATCHER_DESTROY_TODO = 'DESTROY_TODO';
-        this.DISPATCHER_UPDATE_CURRENT_TODO_MESSAGE = 'UPDATE_CURRENT_TODO_MESSAGE';
         this.DISPATCHER_SET_SELECTED_FILTER_LABEL = 'SET_SELECTED_FILTER_LABEL';
-        this.DISPATCHER_RESET_CURRENT_TODO = 'RESET_CURRENT_TODO';
-        this._currentTodo = new Todo();
         this._todos = [];
         this._selectedFilterLabel = TodoFilterLabels.ALL;
-    }
-
-    getCurrentTodo() {
-        return this._currentTodo;
     }
 
     getFilteredList() {
@@ -131,16 +123,8 @@ class TodoStore extends BaseStore {
         this._todos.splice(index, 1);
     }
 
-    _updateCurrentTodoMessage(message) {
-        this._currentTodo.message = message;
-    }
-
     _setSelectedFilterLabel(label) {
         this._selectedFilterLabel = label;
-    }
-
-    _resetCurrentTodo() {
-        this._currentTodo = new Todo();
     }
 
     dispatchHandler(action) {
@@ -169,16 +153,8 @@ class TodoStore extends BaseStore {
                 this._destroyTodo(action.todo);
                 break;
 
-            case this.DISPATCHER_UPDATE_CURRENT_TODO_MESSAGE:
-                this._updateCurrentTodoMessage(action.message);
-                break;
-
             case this.DISPATCHER_SET_SELECTED_FILTER_LABEL:
                 this._setSelectedFilterLabel(action.label);
-                break;
-
-            case this.DISPATCHER_RESET_CURRENT_TODO:
-                this._resetCurrentTodo();
                 break;
 
             //do nothing
