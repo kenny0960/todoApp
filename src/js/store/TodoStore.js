@@ -5,11 +5,11 @@ class TodoStore extends BaseStore {
     constructor() {
         super();
         this.DISPATCHER_CREATE_TODO = 'CREATE_TODO';
+        this.DISPATCHER_UPDATE_TODO = 'UPDATE_TODO';
+        this.DISPATCHER_DESTROY_TODO = 'DESTROY_TODO';
         this.DISPATCHER_TOGGLE_TODO_COMPLETED = 'TOGGLE_TODO_COMPLETED';
         this.DISPATCHER_TOGGLE_ALL_TODO_COMPLETED = 'TOGGLE_ALL_TODO_COMPLETED';
         this.DISPATCHER_CLEAR_ALL_COMPLETED_TODO = 'CLEAR_ALL_COMPLETED_TODO';
-        this.DISPATCHER_UPDATE_TODO = 'UPDATE_TODO';
-        this.DISPATCHER_DESTROY_TODO = 'DESTROY_TODO';
         this.DISPATCHER_SET_SELECTED_FILTER_LABEL = 'SET_SELECTED_FILTER_LABEL';
         this._todos = [];
         this._selectedFilterLabel = TodoFilterLabels.ALL;
@@ -95,6 +95,16 @@ class TodoStore extends BaseStore {
         this._todos.push(todo);
     }
 
+    _updateTodo(todo) {
+        const index = this.getTodoIndex(todo);
+        this._todos[index] = todo;
+    }
+
+    _destroyTodo(todo) {
+        const index = this.getTodoIndex(todo);
+        this._todos.splice(index, 1);
+    }
+
     _toggleTodoCompleted(todo) {
         const index = this.getTodoIndex(todo);
         this._todos[index].isCompleted = ! todo.isCompleted;
@@ -113,16 +123,6 @@ class TodoStore extends BaseStore {
         }
     }
 
-    _updateTodo(todo) {
-        const index = this.getTodoIndex(todo);
-        this._todos[index] = todo;
-    }
-
-    _destroyTodo(todo) {
-        const index = this.getTodoIndex(todo);
-        this._todos.splice(index, 1);
-    }
-
     _setSelectedFilterLabel(label) {
         this._selectedFilterLabel = label;
     }
@@ -131,6 +131,14 @@ class TodoStore extends BaseStore {
         switch (action.actionType) {
             case this.DISPATCHER_CREATE_TODO:
                 this._appendTodo(action.todo);
+                break;
+
+            case this.DISPATCHER_UPDATE_TODO:
+                this._updateTodo(action.todo);
+                break;
+
+            case this.DISPATCHER_DESTROY_TODO:
+                this._destroyTodo(action.todo);
                 break;
 
             case this.DISPATCHER_TOGGLE_TODO_COMPLETED:
@@ -143,14 +151,6 @@ class TodoStore extends BaseStore {
 
             case this.DISPATCHER_CLEAR_ALL_COMPLETED_TODO:
                 this._clearAllCompletedTodo();
-                break;
-
-            case this.DISPATCHER_UPDATE_TODO:
-                this._updateTodo(action.todo);
-                break;
-
-            case this.DISPATCHER_DESTROY_TODO:
-                this._destroyTodo(action.todo);
                 break;
 
             case this.DISPATCHER_SET_SELECTED_FILTER_LABEL:

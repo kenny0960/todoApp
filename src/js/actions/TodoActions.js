@@ -12,6 +12,20 @@ class TodoActions {
         });
     }
 
+    updateTodo(todo) {
+        this._store.getDispatcher().dispatch({
+            actionType: this._store.DISPATCHER_UPDATE_TODO,
+            todo: todo
+        });
+    }
+
+    destroyTodo(todo) {
+        this._store.getDispatcher().dispatch({
+            actionType: this._store.DISPATCHER_DESTROY_TODO,
+            todo: todo
+        });
+    }
+
     toggleTodoCompleted(todo) {
         this._store.getDispatcher().dispatch({
             actionType: this._store.DISPATCHER_TOGGLE_TODO_COMPLETED,
@@ -29,20 +43,6 @@ class TodoActions {
     clearAllCompletedTodo() {
         this._store.getDispatcher().dispatch({
             actionType: this._store.DISPATCHER_CLEAR_ALL_COMPLETED_TODO
-        });
-    }
-
-    updateTodo(todo) {
-        this._store.getDispatcher().dispatch({
-            actionType: this._store.DISPATCHER_UPDATE_TODO,
-            todo: todo
-        });
-    }
-
-    destroyTodo(todo) {
-        this._store.getDispatcher().dispatch({
-            actionType: this._store.DISPATCHER_DESTROY_TODO,
-            todo: todo
         });
     }
 
