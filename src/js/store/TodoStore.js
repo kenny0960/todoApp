@@ -54,7 +54,7 @@ class TodoStore extends BaseStore {
     getTodoIndex(todo) {
         for (const index in this._todos) {
             const _todo = this._todos[index];
-            if (_todo.isEqual(todo)) {
+            if (_todo.id === todo.id) {
                 return index;
             }
         }
